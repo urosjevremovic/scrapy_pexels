@@ -10,7 +10,6 @@ class ImgScraperSpider(scrapy.Spider):
     start_urls = ['http://pexels.com/']
 
     def parse(self, response):
-        urls = response.css('div.photos > article.photo-item photo-item--overlay > a::attr(href)').extract()
         urls = response.xpath('//div[contains(@class, "photos")]//article[contains(@class, "photo-item photo-item--overlay")]/a[contains(@class, "js-photo-link")]//@href').extract()
 
         print(urls)
@@ -22,7 +21,7 @@ class ImgScraperSpider(scrapy.Spider):
     def parse_image(self, response):
         item = PexelsScrapyItem()
         # item['image_urls'] = response.css('picture.image-section__picture > image.image-section__image js-photo-zoom::attr(src)').extract_first()
-        item['title'] = response.xpath('//img[contains(@class, "image-section__thumb")]//@alt').extract_first()
+        item['title'] = response.xpath('//img[contains(@class, "image-section__image js-photo-zoom")]//@alt').extract_first()
         item['image_urls'] = response.xpath('//img[contains(@class, "image-section__image js-photo-zoom")]//@src').extract()
         # item['try_it'] = response.xpath('//img[contains(@class, "image-section__image js-photo-zoom")]//@src').extract()
         print(item['image_urls'])

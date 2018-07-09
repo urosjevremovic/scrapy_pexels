@@ -18,7 +18,7 @@ IMAGES_STORE = '/home/uros/pictures'
 
 
 ITEM_PIPELINES = {
-    'scrapy.pipelines.images.ImagesPipeline': 1,
+    'pexels_scrapy.pipelines.PexelsScrapyPipeline': 1,
 }
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
