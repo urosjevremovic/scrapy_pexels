@@ -20,7 +20,6 @@ class ImgScraperSpider(scrapy.Spider):
         next_page_url = response.xpath('//div[contains(@class, "pagination")]/a[contains(@rel, "next")]//@href').extract_first()
         if next_page_url:
             next_page_url = response.urljoin(next_page_url)
-            print('LOOK HERE {}'.format(next_page_url))
             yield scrapy.Request(url=next_page_url, callback=self.parse)
 
     def parse_image(self, response):
